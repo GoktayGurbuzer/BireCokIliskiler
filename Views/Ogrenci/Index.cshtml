@@ -1,0 +1,31 @@
+@model IEnumerable<Ogrenci>
+@{
+    ViewData["Title"] = "Öğrenci Listesi";
+}
+<h2>Öğrenci Listesi</h2>
+<hr>
+<a href="/Ogrenci/Create" class="btn btn-primary mb-3">Öğrenci Ekle</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 150px;">@Html.DisplayNameFor(m => m.OgrenciId)</th>
+            <th>@Html.DisplayNameFor(m => m.OgrenciAd)</th>
+            <th>@Html.DisplayNameFor(m => m.OgrenciSoyad)</th>
+            <th style="width: 150px;">Detaylar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var ogrenci in Model)
+        {
+            <tr>
+                <td>@ogrenci.OgrenciId</td>
+                <td>@ogrenci.OgrenciAd</td>
+                <td>@ogrenci.OgrenciSoyad</td>
+                <td>
+                    <a asp-controller="Ogrenci" asp-action="Edit" asp-route-id="@ogrenci.OgrenciId" class="btn btn-warning">Düzenle</a>
+                    <a asp-controller="Ogrenci" asp-action="Delete" asp-route-id="@ogrenci.OgrenciId" class="btn btn-danger" onclick="return confirm('@ogrenci.OgrenciAd @ogrenci.OgrenciSoyad isimli öğrenciyi silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+@model IEnumerable<Ogretmen>
+@{
+    ViewData["Title"] = "Öğretmen Listesi";
+}
+<h2>Öğretmen Listesi</h2>
+<hr>
+<a asp-controller="Ogretmen" asp-action="Create" class="btn btn-primary mb-3">Öğretmen Ekle</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 150px;">@Html.DisplayNameFor(m => m.OgretmenId)</th>
+            <th>@Html.DisplayNameFor(m => m.Ad)</th>
+            <th>@Html.DisplayNameFor(m => m.Soyad)</th>
+            <th>@Html.DisplayNameFor(m => m.BaslamaTarihi)</th>
+            <th style="width: 150px;">Detaylar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var ogretmen in Model)
+        {
+            <tr>
+                <td>@ogretmen.OgretmenId</td>
+                <td>@ogretmen.Ad</td>
+                <td>@ogretmen.Soyad</td>
+                <td>@Html.DisplayFor(modelItem => ogretmen.BaslamaTarihi)</td>
+                <td>
+                    <a asp-controller="Ogretmen" asp-action="Edit" asp-route-id="@ogretmen.OgretmenId" class="btn btn-warning">Düzenle</a>
+                    <a asp-controller="Ogretmen" asp-action="Delete" asp-route-id="@ogretmen.OgretmenId" class="btn btn-danger" onclick="return confirm('@ogretmen.Ad @ogretmen.Soyad isimli öğrenciyi silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,31 @@
+@model IEnumerable<Kurs>
+    @{
+        ViewData["Title"] = "Kurs Listesi";
+    }
+    <h2>Kurs Listesi</h2>
+    <hr>
+    <a href="/Kurs/Create" class="btn btn-primary mb-3">Kurs Ekle</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th style="width: 70px;">@Html.DisplayNameFor(m => m.KursId)</th>
+                <th>@Html.DisplayNameFor(m => m.Baslik)</th>
+                <th>@Html.DisplayNameFor(m => m.Ogretmen.AdSoyad)</th>
+                <th style="width: 150px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var kurs in Model)
+            {
+                <tr>
+                    <td class="text-center"><strong>@Html.DisplayFor(modelItem => kurs.KursId)</strong></td>
+                    <td>@Html.DisplayFor(modelItem => kurs.Baslik)</td>
+                    <td>@Html.DisplayFor(modelItem => kurs.Ogretmen.AdSoyad)</td>
+                    <td>
+                        <a asp-controller="Kurs" asp-action="Edit" asp-route-id="@kurs.KursId" class="btn btn-warning">Düzenle</a>
+                        <a asp-controller="Kurs" asp-action="Delete" asp-route-id="@kurs.KursId" class="btn btn-danger" onclick="return confirm('Baslik isimli kursu silmek istediğinize emin misiniz?');">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
